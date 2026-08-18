@@ -12,7 +12,7 @@
             </p>
         </div>
 
-        <a href="#" class="btn btn-dark px-4">
+        <a href="{{ route('category.create') }}" class="btn btn-dark px-4">
             + Create Todo
         </a>
 
