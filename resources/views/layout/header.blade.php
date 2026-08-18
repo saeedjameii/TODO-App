@@ -117,6 +117,19 @@
             color: #adb5bd;
             font-size: 12px;
         }
+
+        .category-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: #f1f3f5;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 18px;
+        }
     </style>
 </head>
 
@@ -145,13 +158,13 @@
             <ul class="navbar-nav ms-auto">
 
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">
+                    <a class="nav-link active" href="{{ route('todo.index') }}">
                         Todos
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{{ route('category.index') }}">
                         Categories
                     </a>
                 </li>

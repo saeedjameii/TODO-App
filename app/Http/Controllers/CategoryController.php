@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+
+    public function index(){
+        $categories = Category::all();
+
+        return view('categories.index',  compact('categories'));
+    }
+
     public function create(){
         return view('categories.create');
     }
@@ -21,5 +28,8 @@ class CategoryController extends Controller
         Category::create([
             'title' => $request->title
         ]);
+
+        return redirect()->route('category.index');
     }
+
 }
