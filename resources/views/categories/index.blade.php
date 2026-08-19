@@ -98,7 +98,7 @@
                                 {{-- Actions --}}
                                 <td class="text-end">
 
-                                    <a href="#"
+                                    <a href="{{ route('category.edit', ['category' => $category->id]) }}"
                                        class="btn btn-sm btn-outline-secondary">
                                         Edit
                                     </a>
