@@ -12,7 +12,7 @@
             </p>
         </div>
 
-        <a href="{{ route('category.create') }}" class="btn btn-dark px-4">
+        <a href="{{ route('todo.create') }}" class="btn btn-dark px-4">
             + Create Todo
         </a>
 
@@ -67,6 +67,7 @@
                     <tbody>
 
                         {{-- Todo 1 --}}
+                        
                         <tr>
 
                             <td>
