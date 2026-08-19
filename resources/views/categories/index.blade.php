@@ -103,10 +103,13 @@
                                         Edit
                                     </a>
 
-                                    <a href="#"
-                                       class="btn btn-sm btn-outline-danger">
-                                        Delete
-                                    </a>
+                                    <form action="{{ route('category.destroy', ['category' => $category->id]) }}" method="POST" style="display: inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-outline-danger">
+                                            Delete
+                                        </button>
+                                    </form>
 
                                 </td>
 
