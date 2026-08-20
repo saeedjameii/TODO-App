@@ -20,7 +20,7 @@ return new class extends Migration
             $table->text('description');
             $table -> boolean('status')->default(0);
 
-            $table->unsignedBigInteger('Category_id');
+            $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories');
 
             $table->softDeletes();

@@ -30,7 +30,7 @@
                     <h5 class="mb-1 fw-bold">Todo List</h5>
 
                     <small class="text-muted">
-                        3 tasks
+                        {{ $todos->count() }} tasks
                     </small>
                 </div>
 
@@ -67,148 +67,67 @@
                     <tbody>
 
                         {{-- Todo 1 --}}
-                        
+                            @foreach ($todos as $todo)
                         <tr>
 
                             <td>
-                                <div class="empty-image">
-                                    No Image
-                                </div>
+                                <img width="90" class="rounded" src="{{ asset('/images/'. $todo->image) }}" alt="">
                             </td>
 
                             <td>
                                 <div class="fw-semibold">
-                                    Learn Laravel
+                                    {{ $todo->title }}
                                 </div>
 
                                 <small class="text-muted">
-                                    Practice Laravel basics
+                                    {{ $todo->description }}
                                 </small>
                             </td>
 
                             <td>
                                 <span class="category-badge">
-                                    Programming
+                                    {{ $todo->category->title }}
                                 </span>
                             </td>
 
                             <td>
-                                <span class="badge bg-success-subtle text-success px-3 py-2">
-                                    Completed
-                                </span>
+                                @if($todo->status)
+                                    <span class="badge bg-success-subtle text-success px-3 py-2">
+                                        Completed
+                                    </span>
+
+                                @else
+                                    <span class="badge bg-warning-subtle text-warning px-3 py-2">
+                                        Pending
+                                    </span> 
+                                
+                                @endif
                             </td>
 
                             <td class="text-end">
 
-                                <a href="#"
+                                <a href="{{ route('todo.show', ['todo' => $todo->id]) }}"
                                    class="btn btn-sm btn-outline-secondary">
                                     Show
                                 </a>
 
-                                <button disabled
-                                        class="btn btn-sm btn-outline-success">
-                                    Done
-                                </button>
+                                @if (! $todo->status)
+                                    <form action="{{ route('todo.complete', $todo) }}" method="POST" class="d-inline">
+                                        @csrf
+                                        @method('PATCH')
+
+                                        <button type="submit" class="btn btn-sm btn-outline-success">
+                                            Done
+                                        </button>
+                                    </form>
+                                @endif
 
                             </td>
 
                         </tr>
+                            @endforeach
 
 
-                        {{-- Todo 2 --}}
-                        <tr>
-
-                            <td>
-                                <div class="empty-image">
-                                    No Image
-                                </div>
-                            </td>
-
-                            <td>
-                                <div class="fw-semibold">
-                                    Learn Eloquent
-                                </div>
-
-                                <small class="text-muted">
-                                    Practice Eloquent relationships
-                                </small>
-                            </td>
-
-                            <td>
-                                <span class="category-badge">
-                                    Laravel
-                                </span>
-                            </td>
-
-                            <td>
-                                <span class="badge bg-warning-subtle text-warning px-3 py-2">
-                                    Pending
-                                </span>
-                            </td>
-
-                            <td class="text-end">
-
-                                <a href="#"
-                                   class="btn btn-sm btn-outline-secondary">
-                                    Show
-                                </a>
-
-                                <a href="#"
-                                   class="btn btn-sm btn-success">
-                                    Mark Done
-                                </a>
-
-                            </td>
-
-                        </tr>
-
-
-                        {{-- Todo 3 --}}
-                        <tr>
-
-                            <td>
-                                <div class="empty-image">
-                                    No Image
-                                </div>
-                            </td>
-
-                            <td>
-                                <div class="fw-semibold">
-                                    Build Todo App
-                                </div>
-
-                                <small class="text-muted">
-                                    Create CRUD functionality
-                                </small>
-                            </td>
-
-                            <td>
-                                <span class="category-badge">
-                                    Project
-                                </span>
-                            </td>
-
-                            <td>
-                                <span class="badge bg-warning-subtle text-warning px-3 py-2">
-                                    Pending
-                                </span>
-                            </td>
-
-                            <td class="text-end">
-
-                                <a href="#"
-                                   class="btn btn-sm btn-outline-secondary">
-                                    Show
-                                </a>
-
-                                <a href="#"
-                                   class="btn btn-sm btn-success">
-                                    Mark Done
-                                </a>
-
-                            </td>
-
-                        </tr>
 
                     </tbody>
 

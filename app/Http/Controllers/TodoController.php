@@ -9,7 +9,9 @@ use Illuminate\Http\Request;
 class TodoController extends Controller
 {
     public function index(){
-        return view('todos.index');
+
+        $todos = Todo::all();
+        return view('todos.index', compact('todos'));
     }
 
     public function create(){
@@ -24,7 +26,7 @@ class TodoController extends Controller
             'image' => 'required|max:2000|image',
             'title' => 'required|min:5',
             'description' => 'required|min:5',
-            'category_id' => 'required|integer'
+            'category_id' => 'required|exists:categories,id',
         ]);
 
         $filename = time() . '_' . $request -> image -> getClientOriginalName();
@@ -41,6 +43,41 @@ class TodoController extends Controller
 
     return redirect()->route('todo.index');
 
+    }
+
+    public function show(Todo $todo){
+        return view('todos.show', compact('todo'));
+    }
+
+    public function edit(Todo $todo){
+        $categories = Category::all();
+
+        return view('todos.edit', compact('todo', 'categories'));
+    }
+
+    public function update(Request $request, Todo $todo){
+        $validated = $request->validate([
+            'image' => 'nullable|max:2000|image',
+            'title' => 'required|min:5',
+            'description' => 'required|min:5',
+            'category_id' => 'required|exists:categories,id',
+        ]);
+
+        if ($request->hasFile('image')) {
+            $filename = time() . '_' . $request->image->getClientOriginalName();
+            $request->image->storeAs('/images', $filename);
+            $validated['image'] = $filename;
+        }
+
+        $todo->update($validated);
+
+        return redirect()->route('todo.show', $todo);
+    }
+
+    public function complete(Todo $todo){
+        $todo->update(['status' => 1]);
+
+        return redirect()->route('todo.index');
     }
 
 }
