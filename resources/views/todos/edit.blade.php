@@ -57,6 +57,15 @@
                 </div>
 
                 <div class="mb-4">
+                    <label for="status" class="form-label fw-semibold">Status</label>
+                    <select id="status" name="status" class="form-select @error('status') is-invalid @enderror">
+                        <option value="0" @selected(old('status', $todo->status) == 0)>Pending</option>
+                        <option value="1" @selected(old('status', $todo->status) == 1)>Completed</option>
+                    </select>
+                    @error('status')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                </div>
+
+                <div class="mb-4">
                     <label for="description" class="form-label fw-semibold">Description</label>
                     <textarea id="description" name="description" rows="5"
                               class="form-control @error('description') is-invalid @enderror"

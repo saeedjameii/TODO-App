@@ -61,6 +61,7 @@ class TodoController extends Controller
             'title' => 'required|min:5',
             'description' => 'required|min:5',
             'category_id' => 'required|exists:categories,id',
+            'status' => 'required|boolean',
         ]);
 
         if ($request->hasFile('image')) {
@@ -78,6 +79,12 @@ class TodoController extends Controller
         $todo->update(['status' => 1]);
 
         return redirect()->route('todo.index');
+    }
+
+    public function destroy(Todo $todo){
+        $todo -> delete();
+
+        return redirect()-> route('todo.index');
     }
 
 }

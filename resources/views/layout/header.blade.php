@@ -138,7 +138,7 @@
 <nav class="navbar navbar-expand-lg bg-white">
     <div class="container">
 
-        <a class="navbar-brand text-dark" href="#">
+        <a class="navbar-brand text-dark" href="{{ route('todo.index') }}">
             ✓ Todo App
         </a>
 

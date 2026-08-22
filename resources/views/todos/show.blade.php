@@ -144,6 +144,14 @@
                     Back
                 </a>
 
+                <form action="{{ route('todo.destroy', ['todo' => $todo->id]) }}" method="POST" style="display: inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-outline-danger ">
+                        Delete
+                    </button>
+                </form>
+
                 <a href="{{ route('todo.edit', $todo) }}"
                    class="btn btn-dark">
                     Edit Todo
