@@ -34,13 +34,13 @@
                     </small>
                 </div>
 
-                <div>
-                    <select class="form-select form-select-sm">
-                        <option>All Tasks</option>
-                        <option>Completed</option>
-                        <option>Pending</option>
+                <form method="GET" action="{{ route('todo.index') }}">
+                    <select name="status" onchange="this.form.submit()" class="form-select form-select-sm">
+                        <option value="" @selected(request('status') === null || request('status') === '')>All Tasks</option>
+                        <option value="1" @selected(request('status') == '1')>Completed</option>
+                        <option value="0" @selected(request('status') == '0')>Pending</option>
                     </select>
-                </div>
+                </form>
 
             </div>
 
@@ -134,6 +134,8 @@
                 </table>
 
             </div>
+
+            {{ $todos->links() }}
 
         </div>
 

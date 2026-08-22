@@ -8,11 +8,24 @@ use Illuminate\Http\Request;
 
 class TodoController extends Controller
 {
-    public function index(){
+public function index(Request $request)
+{
 
-        $todos = Todo::all();
-        return view('todos.index', compact('todos'));
+    // $categories = Category::all();
+    $todos = Todo::query();
+
+    if ($request->status == '1') {
+        $todos->where('status', true);
     }
+
+    if ($request->status == '0') {
+        $todos->where('status', false);
+    }
+
+    $todos = $todos->paginate(2)->withQueryString();
+
+    return view('todos.index', compact('todos'));
+}
 
     public function create(){
 
